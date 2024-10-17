@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单数据展示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+            font-size: 42px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .value {
+            color: #333;
+        }
+
+        .fixed-size-photo {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #777;
+            font-size: 18px;
+        }
+        span{
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>看叭看叭</h3>
+    <br>
+    {% if form_data %}
+        <ul>
+            {% for key, value in form_data.items() %}
+                {% if key == '照片' %}
+                    <li>
+                        <span class="label">{{ key }}:</span>
+                        <img src="{{ url_for('uploaded_file', filename=value) }}" alt="Photo" class="fixed-size-photo">
+                    </li>
+                {% else %}
+                    <li>
+                        <span class="label">{{ key }}:</span>
+                        <span class="value">{{ value }}</span>
+
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>没有找到你的资料</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

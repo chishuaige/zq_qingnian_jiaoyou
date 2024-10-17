@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>文件上传示例</title>
+</head>
+<body>
+    <form action="/submit" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="name">姓名:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">邮箱:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="file">上传文件:</label>
+            <input type="file" id="file" name="file" required>
+        </div>
+        <div>
+            <button type="submit">提交</button>
+        </div>
+    </form>
+</body>
+</html>

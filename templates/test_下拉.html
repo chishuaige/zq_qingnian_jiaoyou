@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Layui 下拉框示例</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.8.3/dist/css/layui.css">
+  <script src="https://cdn.jsdelivr.net/npm/layui@2.8.3/dist/layui.js"></script>
+</head>
+<body>
+
+<div class="layui-form">
+  <form class="layui-form" action="">
+    <div class="layui-form-item">
+      <label class="layui-form-label">选择城市</label>
+      <div class="layui-input-block">
+        <select name="city" lay-verify="required" placeholder="请选择城市" autocomplete="off" class="layui-select">
+          <option value="">请选择</option>
+          <option value="beijing">北京</option>
+          <option value="shanghai">上海</option>
+          <option value="guangzhou">广州</option>
+          <option value="shenzhen">深圳</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button type="submit" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/layui@2.7.7/dist/layui.js"></script>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+
+  // 监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    return false; // 阻止表单跳转。如果需要表单跳转，去掉这段即可。
+  });
+});
+</script>
+
+</body>
+</html>

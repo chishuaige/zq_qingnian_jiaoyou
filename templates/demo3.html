@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>照片上传示例</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.8.3/dist/css/layui.css">
+  <script src="https://cdn.jsdelivr.net/npm/layui@2.8.3/dist/layui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .upload-container {
+            display: flex;
+            align-items: center;
+        }
+        .upload-container img {
+            margin-left: 10px;
+            max-width: 100px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm" action="/submit" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="name">姓名:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">邮箱:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="upload-container">
+            <button type="button" id="uploadBtn" class="layui-btn layui-btn-primary layui-btn-sm">
+                <i class="layui-icon">&#xe67c;</i> 上传照片
+            </button>
+            <input type="file" id="fileInput" style="display: none;" required>
+            <input type="hidden" id="image" name="image" required>
+            <img id="previewImg" src="" alt="预览照片" style="display: none;">
+        </div>
+        <div>
+            <button type="button" id="submitButton" class="layui-btn">提交</button>
+        </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/layui-v2.6.8/dist/layui.js"></script>
+    <script>
+        // 触发文件选择对话框
+        document.getElementById('uploadBtn').onclick = function() {
+            document.getElementById('fileInput').click();
+        };
+
+        // 处理文件选择
+        document.getElementById('fileInput').onchange = function(event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('previewImg').style.display = 'block';
+                    document.getElementById('image').value = e.target.result; // 将图片路径存储到隐藏输入框中
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        // 提交按钮点击事件
+        document.getElementById('submitButton').addEventListener('click', function() {
+            var form = document.getElementById('myForm');
+            if (form.checkValidity()) {
+                // 表单验证通过，提交表单
+                form.submit();
+            } else {
+                // 表单验证未通过，显示提示信息
+                layer.msg('请填写所有必填项');
+                form.reportValidity(); // 触发表单的默认验证提示
+            }
+        });
+    </script>
+</body>
+</html>

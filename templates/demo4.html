@@ -1,0 +1,22 @@
+<form id="myForm" action="/submit" method="post">
+    <label>
+        <input type="checkbox" name="terms" value="agree" required>
+        我同意服务条款
+    </label>
+    <br>
+    <span id="error-message" style="color:red; display:none;">您必须同意服务条款才能继续。</span>
+    <br>
+    <button type="submit">提交</button>
+</form>
+
+<script>
+document.getElementById('myForm').addEventListener('submit', function(event) {
+    var checkbox = document.querySelector('input[name=terms]');
+    if (!checkbox.checked) {
+        document.getElementById('error-message').style.display = 'block';
+        event.preventDefault(); // 阻止表单提交
+    } else {
+        document.getElementById('error-message').style.display = 'none';
+    }
+});
+</script>
